@@ -2,7 +2,6 @@
 # Author:        Weithenn Wang (weithenn at weithenn.org)
 # Version:       v0.1 - June 16, 2021
 # Description:   Check whether the user exists in AD or not
-# Reference URL: 
 # ==================================================================
 
 # Read users list
