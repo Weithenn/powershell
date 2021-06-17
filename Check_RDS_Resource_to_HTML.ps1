@@ -47,7 +47,7 @@ $RDS_Resources = @(
 
 
 # Show RDS farms resources
-$Title = "<h1>Shanghai Lab Bastion Resources</h1>"
+$Title = "<h1>Weithenn RDS Farms Resources</h1>"
 $RDS_Farms1 = $RDS_Sessions | ConvertTo-Html -Property "SSD Sessions", "mNAND Sessions", "Common Sessions", "Total Sessions" -Fragment -PreContent "<h2>Users Session Information</h2>"
 $RDS_Farms2 = $RDS_Resources | ConvertTo-Html -Property "Server Name", "CPU Usage %", "Memory Usage %", "Free Disk Size (GB)" -Fragment -PreContent "<h2>System Performance Information</h2>"
 
