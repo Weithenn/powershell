@@ -54,7 +54,7 @@ $RDS_Farms2 = $RDS_Resources | ConvertTo-Html -Property "Server Name", "CPU Usag
 
 
 # The command below will combine all the information gathered into a single HTML report
-$Report = ConvertTo-HTML -Body "$Title $RDS_Farms1 $RDS_Farms2" -Title "Shanghai Lab Bastion Resources" -PostContent "<p>Creation Date: $(Get-Date)</p>" -CssUri ".\css\style.css"
+$Report = ConvertTo-HTML -Body "$Title $RDS_Farms1 $RDS_Farms2" -Title "Weithenn RDS Farms Resources" -PostContent "<p>Creation Date: $(Get-Date)</p>" -CssUri ".\css\style.css"
 
 
 
