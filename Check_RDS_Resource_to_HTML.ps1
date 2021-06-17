@@ -37,10 +37,10 @@ $RDS_Sessions = New-Object PSObject -Property ([ordered]@{
 
 # Check RDCB, RDWeb, and RDSH resources
 $RDS_Resources = @(
-    Invoke-Command -ScriptBlock ${Function:Get-BastionResources} -ComputerName $RDCB, $RDWeb    
+    Invoke-Command -ScriptBlock ${Function:Get-RDSResources} -ComputerName $RDCB, $RDWeb    
     1..$RDSH_Hosts | % {
         $i = "{0:d2}" -f $_
-        Invoke-Command -ScriptBlock ${Function:Get-BastionResources} -ComputerName "$RDSH_Prefix$($i)"
+        Invoke-Command -ScriptBlock ${Function:Get-RDSResources} -ComputerName "$RDSH_Prefix$($i)"
     }
 )
 
