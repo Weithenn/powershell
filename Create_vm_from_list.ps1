@@ -1,6 +1,6 @@
 # ==================================================================
 # Author:       Weithenn Wang (weithenn at weithenn.org)
-# Version:      v0.2 - June 21, 2021
+# Version:      v0.3 - June 25, 2021
 # Description:  Create new vm in vSAN or NFS datastore
 # ==================================================================
 
@@ -15,9 +15,9 @@ Get-Module -Name VMware.PowerCLI -ListAvailable
 
 
 # Connect to vCenter Server
-$Domain_Credential = Get-Credential -Credential $ADUser
 $vCenter = "vcenter.lab.weithenn.org"
 $ADUser = "LAB\Weithenn"
+$Domain_Credential = Get-Credential -Credential $ADUser
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore
 Connect-VIServer -Server $vCenter -Credential $Domain_Credential
 
@@ -25,6 +25,7 @@ Connect-VIServer -Server $vCenter -Credential $Domain_Credential
 
 # Clone VM from vm template 
 $VM_Prefix = Get-Content -Path C:\PowerCLI\VMList.txt
+$VM_Postfix = "-vm"
 $vSAN_Cluster = "vSAN-Cluster01"
 $vSAN_Datastore = "vsan01-ds01"
 $NFS_Cluster = "NFS-Cluster01"
@@ -41,14 +42,14 @@ $VM_OS = "windows9_64Guest"
 
 # Option 1: for vSAN datastore
 foreach ($VM_List in ($VM_Prefix)){
-    If (Get-VM -Name "$VM_List$('-VM')" -ErrorAction SilentlyContinue){
-        Write-Host "$VM_List$('-VM') - already exists!" -ForegroundColor Red
+    If (Get-VM -Name "$VM_List$($VM_Postfix)" -ErrorAction SilentlyContinue){
+        Write-Host "$VM_List$($VM_Postfix) - already exists!" -ForegroundColor Red
     } else {
-        Write-Host "$VM_List$('-VM') - ready to create vm" -ForegroundColor Green
-        New-VM -Name "$VM_List$('-VM')" -ResourcePool $vSAN_Cluster -Datastore $vSAN_Datastore -NumCpu $VM_vCPU -MemoryMB $VM_vRAM -DiskGB $VM_vDisk -Portgroup $VM_vNet -Location $VM_Folder -GuestId $VM_OS -RunAsync
+        Write-Host "$VM_List$($VM_Postfix) - ready to create vm" -ForegroundColor Green
+        New-VM -Name "$VM_List$($VM_Postfix)" -ResourcePool $vSAN_Cluster -Datastore $vSAN_Datastore -NumCpu $VM_vCPU -MemoryGB $VM_vRAM -DiskGB $VM_vDisk -Portgroup $VM_vNet -Location $VM_Folder -GuestId $VM_OS -RunAsync
         Start-Sleep -Seconds 3
         # Change network adapter from e1000e to vmxnet3
-        Get-VM "$VM_List$('-VM')" | Get-NetworkAdapter | Set-NetworkAdapter -Type Vmxnet3 -Confirm:$false        
+        Get-VM "$VM_List$($VM_Postfix)" | Get-NetworkAdapter | Set-NetworkAdapter -Type Vmxnet3 -Confirm:$false        
     }    
 }
 
@@ -56,14 +57,14 @@ foreach ($VM_List in ($VM_Prefix)){
 
 # Option 2: for NFS datastore 
 foreach ($VM_List in ($VM_Prefix)){
-    If (Get-VM -Name "$VM_List$('-VM')" -ErrorAction SilentlyContinue){
-        Write-Host "$VM_List$('-VM') - already exists!" -ForegroundColor Red
+    If (Get-VM -Name "$VM_List$($VM_Postfix)" -ErrorAction SilentlyContinue){
+        Write-Host "$VM_List$($VM_Postfix) - already exists!" -ForegroundColor Red
     } else {
-        Write-Host "$VM_List$('-VM') - ready to create vm" -ForegroundColor Green
-        New-VM -Name "$VM_List$('-VM')" -ResourcePool $NFS_Cluster -Datastore $NFS_Datastore -NumCpu $VM_vCPU -MemoryMB $VM_vRAM -DiskGB $VM_vDisk -DiskStorageFormat $VM_vDiskType -Portgroup $VM_vNet -Location $VM_Folder -GuestId $VM_OS -RunAsync
+        Write-Host "$VM_List$($VM_Postfix) - ready to create vm" -ForegroundColor Green
+        New-VM -Name "$VM_List$($VM_Postfix)" -ResourcePool $NFS_Cluster -Datastore $NFS_Datastore -NumCpu $VM_vCPU -MemoryGB $VM_vRAM -DiskGB $VM_vDisk -DiskStorageFormat $VM_vDiskType -Portgroup $VM_vNet -Location $VM_Folder -GuestId $VM_OS -RunAsync
         Start-Sleep -Seconds 3
         # Change network adapter from e1000e to vmxnet3
-        Get-VM "$VM_List$('-VM')" | Get-NetworkAdapter | Set-NetworkAdapter -Type Vmxnet3 -Confirm:$false        
+        Get-VM "$VM_List$($VM_Postfix)" | Get-NetworkAdapter | Set-NetworkAdapter -Type Vmxnet3 -Confirm:$false        
     }    
 }
 
