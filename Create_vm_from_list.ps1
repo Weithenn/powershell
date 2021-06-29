@@ -1,6 +1,6 @@
 # ==================================================================
 # Author:       Weithenn Wang (weithenn at weithenn.org)
-# Version:      v0.3 - June 25, 2021
+# Version:      v0.4 - June 29, 2021
 # Description:  Create new vm in vSAN or NFS datastore
 # ==================================================================
 
@@ -49,7 +49,9 @@ foreach ($VM_List in ($VM_Prefix)){
         New-VM -Name "$VM_List$($VM_Postfix)" -ResourcePool $vSAN_Cluster -Datastore $vSAN_Datastore -NumCpu $VM_vCPU -MemoryGB $VM_vRAM -DiskGB $VM_vDisk -Portgroup $VM_vNet -Location $VM_Folder -GuestId $VM_OS -RunAsync
         Start-Sleep -Seconds 3
         # Change network adapter from e1000e to vmxnet3
-        Get-VM "$VM_List$($VM_Postfix)" | Get-NetworkAdapter | Set-NetworkAdapter -Type Vmxnet3 -Confirm:$false        
+        Get-VM "$VM_List$($VM_Postfix)" | Get-NetworkAdapter | Set-NetworkAdapter -Type Vmxnet3 -Confirm:$false
+        # Add CD/DVD drive (for vmware tools upgrade)
+        New-CDDrive -VM "$VM_List$($VM_Postfix)" -StartConnected:$true -Confirm:$false
     }    
 }
 
@@ -64,7 +66,9 @@ foreach ($VM_List in ($VM_Prefix)){
         New-VM -Name "$VM_List$($VM_Postfix)" -ResourcePool $NFS_Cluster -Datastore $NFS_Datastore -NumCpu $VM_vCPU -MemoryGB $VM_vRAM -DiskGB $VM_vDisk -DiskStorageFormat $VM_vDiskType -Portgroup $VM_vNet -Location $VM_Folder -GuestId $VM_OS -RunAsync
         Start-Sleep -Seconds 3
         # Change network adapter from e1000e to vmxnet3
-        Get-VM "$VM_List$($VM_Postfix)" | Get-NetworkAdapter | Set-NetworkAdapter -Type Vmxnet3 -Confirm:$false        
+        Get-VM "$VM_List$($VM_Postfix)" | Get-NetworkAdapter | Set-NetworkAdapter -Type Vmxnet3 -Confirm:$false
+        # Add CD/DVD drive (for vmware tools upgrade)
+        New-CDDrive -VM "$VM_List$($VM_Postfix)" -StartConnected:$true -Confirm:$false
     }    
 }
 
