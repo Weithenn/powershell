@@ -1,13 +1,13 @@
 # ==================================================================
 # Author:       Weithenn Wang (weithenn at weithenn.org)
-# Version:      v0.2 - Auguest 10, 2021
+# Version:      v0.3 - Auguest 10, 2021
 # Description:  Keep ping connectivity by hosts list
 # ==================================================================
 
 # Get hosts list
 $Today = Get-Date -Format "yyyyMMdd"
-$Ping_hosts = Get-Content -Path C:\PowerShell_Lab\Ping_hosts.txt
-$Number_of_hosts = (Get-Content -Path C:\PowerShell_Lab\Ping_hosts.txt).Count
+$Ping_hosts = Get-Content -Path ".\Ping_hosts.txt"
+$Number_of_hosts = (Get-Content -Path ".\Ping_hosts.txt").Count
 $Ping_interval = 60
 
 
@@ -24,7 +24,7 @@ while ($true){
        If (Test-Connection -ComputerName $Hosts -Count 1 -Quiet){
        } else {
            Write-Host "$Hosts - ping and hostname resolution failed!" -ForegroundColor Red
-           "$(Get-Date) - $Hosts" | Out-File -FilePath C:\PowerShell_Lab\"$Today"_ping_failed_hosts.txt -Append
+           "$(Get-Date) - $Hosts" | Out-File -FilePath ".\$($Today)_ping_failed_hosts.txt" -Append
        }
    }
    Write-Host ""
