@@ -1,6 +1,6 @@
 # ==========================================================================================
 # Author:       Weithenn Wang (weithenn at weithenn.org)
-# Version:      v0.1 - Auguest 10, 2021
+# Version:      v0.2 - Auguest 11, 2021
 # Description:  Execution multi SSH connection through Windows Terminal by hosts list
 # Requirment:
 #  - Get Windows Terminal from Windows Store
@@ -22,7 +22,7 @@ $Wshell = New-Object -ComObject WScript.Shell
 
 
 # Get SSH hosts list
-$SSH_hosts = Get-Content -Path C:\PowerShell_Lab\ssh_hosts.txt
+$SSH_hosts = Get-Content -Path ".\ssh_hosts.txt"
 
 
 
@@ -35,6 +35,6 @@ foreach ($Hosts in $SSH_hosts){
         $Wshell.SendKeys("{ENTER}")
     } else {
         Write-Host "$Hosts - ping and hostname resolution failed!" -ForegroundColor Red
-        "$(Get-Date) - $Hosts" | Out-File -FilePath C:\PowerShell_Lab\"$Today"_ssh_failed_hosts.txt -Append
+        "$(Get-Date) - $Hosts" | Out-File -FilePath ".\$($Today)_ssh_failed_hosts.txt" -Append
     }
 }
