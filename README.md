@@ -1,2 +1,2 @@
 # powershell
-My Buildup or Maintenance Hyper-V / S2D PowerShell Script
+My test or build up Hyper-V, S2D, Azure Stack HCI, AKS EE...etc PowerShell script.
