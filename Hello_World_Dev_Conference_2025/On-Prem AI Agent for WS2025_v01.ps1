@@ -76,7 +76,7 @@ Install-Module -Name Az -Repository PSGallery -Force
 Get-InstalledModule -Name Az -AllVersions
 
 # For Copilot in Azure Agent
-$TenantId = "4da9e387-89d2-4e05-bac1-7d764acc6e5a"
+$TenantId = "4daxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxe5a"
 $TenantId = "<Your_Azure_TenantId>"
 
 Connect-AzAccount -TenantId $TenantId
