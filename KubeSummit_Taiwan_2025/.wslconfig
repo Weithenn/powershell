@@ -1,0 +1,6 @@
+[wsl2]
+memory=16GB
+processors=4
+swap=16GB
+localhostForwarding=true
+nestedVirtualization=true
