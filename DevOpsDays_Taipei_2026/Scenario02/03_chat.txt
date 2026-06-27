@@ -1,0 +1,6 @@
+你有哪些工具可以使用?
+
+
+請使用 powershell_mcp 工具，幫我檢查 Print Spooler 服務狀態
+如果發現它狀態不是 Running，請幫我 Restart Service
+請搭配使用 start_console 工具，讓我知道整體的執行情況

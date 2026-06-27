@@ -1,0 +1,15 @@
+# 載入模組，確認模組功能，應該會看到 MCP 相關的 Cmdlet
+Import-Module PowerShell.MCP
+Get-Command -Module PowerShell.MCP
+
+# 測試 PowerShell.MCP 提供的 Cmdlet 能否正確運作
+Add-LinesToFile -Path "C:\temp\demo.txt" -Content "Hello MCP"
+Show-TextFiles -Path "C:\temp\demo.txt"
+
+# 如果參數不對，可以看用法
+Get-Help Add-LinesToFile -Detailed
+Get-Help Show-TextFiles -Detailed
+
+# 取得 PowerShell.MCP 的 Proxy 路徑
+Get-MCPProxyPath 
+C:\Program Files\PowerShell\Modules\PowerShell.MCP\1.11.0\bin\win-x64\PowerShell.MCP.Proxy.exe

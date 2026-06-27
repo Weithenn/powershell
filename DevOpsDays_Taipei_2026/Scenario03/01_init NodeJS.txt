@@ -1,0 +1,11 @@
+# 建立並進入資料夾
+New-Item -ItemType Directory -Path "C:\mcp-servers\windows-admin-server" -Force
+cd "C:\mcp-servers\windows-admin-server"
+
+
+# 初始化 Node.js 專案
+npm init -y
+
+
+# 安裝 MCP 核心套件
+npm install @modelcontextprotocol/sdk

@@ -1,0 +1,2 @@
+# 動態監控 AI 的一舉一動
+Get-Content -Path "C:\mcp-servers\audit.log" -Wait -Tail 10

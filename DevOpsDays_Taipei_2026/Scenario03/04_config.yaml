@@ -1,0 +1,11 @@
+name: Main Config
+version: 1.0.0
+schema: v1
+models:
+  - name: Gemma4:e4b
+    provider: ollama
+    model: gemma4:e4b
+mcpServers:
+  - name: windows-admin-server
+    command: node
+    args: ["C:/mcp-servers/windows-admin-server/index.js"]

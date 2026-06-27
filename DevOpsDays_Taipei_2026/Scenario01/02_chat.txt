@@ -1,0 +1,7 @@
+你有哪些工具可以使用?
+
+
+請幫我檢查 Print Spooler 服務的狀態
+
+
+請使用工具，幫我檢查 Print Spooler 服務狀態，如果發現它狀態不是 Running，請幫我 Restart Service
